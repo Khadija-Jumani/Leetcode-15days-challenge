@@ -4,7 +4,6 @@ class Solution:
         result = []
 
         for i in range(len(nums)):
-            # Skip duplicate values for i
             if i > 0 and nums[i] == nums[i - 1]:
                 continue
 
@@ -16,10 +15,9 @@ class Solution:
                 if total == 0:
                     result.append([nums[i], nums[left], nums[right]])
 
-                    # Skip duplicates for left
+                    # Skip duplicates
                     while left < right and nums[left] == nums[left + 1]:
                         left += 1
-                    # Skip duplicates for right
                     while left < right and nums[right] == nums[right - 1]:
                         right -= 1
 
