@@ -1,37 +1,38 @@
 class Solution:
     def threeSum(self, nums):
-        nums.sort()              # Sort the array
+        nums.sort()  # Sort the array
         result = []
-        n = len(nums)
 
-        for i in range(n - 2):
-            # Skip duplicate values at i
+        for i in range(len(nums) - 2):
+            # Skip duplicates for the first element
             if i > 0 and nums[i] == nums[i - 1]:
                 continue
 
-            left = i + 1
-            right = n - 1
-
+            left, right = i + 1, len(nums) - 1
             while left < right:
-                s = nums[i] + nums[left] + nums[right]
+                total = nums[i] + nums[left] + nums[right]
 
-                if s == 0:
-                    # Valid triplet found
+                if total == 0:
                     result.append([nums[i], nums[left], nums[right]])
+
+                    # Skip duplicates for left and right
+                    while left < right and nums[left] == nums[left + 1]:
+                        left += 1
+                    while left < right and nums[right] == nums[right - 1]:
+                        right -= 1
 
                     left += 1
                     right -= 1
-
-                    # Skip duplicate values at left
-                    while left < right and nums[left] == nums[left - 1]:
-                        left += 1
-                    # Skip duplicate values at right
-                    while left < right and nums[right] == nums[right + 1]:
-                        right -= 1
-
-                elif s < 0:
-                    left += 1   # Need a bigger sum
+                elif total < 0:
+                    left += 1
                 else:
-                    right -= 1  # Need a smaller sum
+                    right -= 1
 
         return result
+
+# Example usage (for local testing):
+if __name__ == "__main__":
+    sol = Solution()
+    print(sol.threeSum([-1,0,1,2,-1,-4]))  # Output: [[-1,-1,2],[-1,0,1]]
+    print(sol.threeSum([0,1,1]))           # Output: []
+    print(sol.threeSum([0,0,0]))           # Output: [[0,0,0]]
