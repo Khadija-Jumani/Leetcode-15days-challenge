@@ -3,11 +3,7 @@ class Solution:
         groups = {}
 
         for word in strs:
-            count = [0] * 26  # lowercase a-z
-            for c in word:
-                count[ord(c) - ord('a')] += 1
-
-            key = tuple(count)  # hashable
+            key = ''.join(sorted(word))   # sorted anagram signature
             if key not in groups:
                 groups[key] = []
             groups[key].append(word)
