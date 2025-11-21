@@ -1,11 +1,19 @@
 class Solution:
     def twoSum(self, numbers, target):
-        l, r = 0, len(numbers) - 1
-        while l < r:
-            s = numbers[l] + numbers[r]
-            if s == target:
-                return [l+1, r+1]
-            if s < target:
-                l += 1
+        left = 0
+        right = len(numbers) - 1
+
+        while left < right:
+            current_sum = numbers[left] + numbers[right]
+
+            # If the sum matches target → return 1-indexed positions
+            if current_sum == target:
+                return [left + 1, right + 1]
+
+            # If sum is too small → move left pointer forward
+            elif current_sum < target:
+                left += 1
+
+            # If sum is too large → move right pointer backward
             else:
-                r -= 1
+                right -= 1
