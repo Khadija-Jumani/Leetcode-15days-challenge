@@ -6,13 +6,10 @@ class MinStack:
 
     def push(self, val):
         self.stack.append(val)
-
-        # If minStack is empty or the new value is <= current min, push it
-        if not self.minStack or val <= self.minStack[-1]:
+        if not self.minStack:
             self.minStack.append(val)
         else:
-            # Repeat the current minimum for constant-time getMin
-            self.minStack.append(self.minStack[-1])
+            self.minStack.append(min(val, self.minStack[-1]))
 
     def pop(self):
         self.stack.pop()
